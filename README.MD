@@ -1,4 +1,5 @@
-#pyFIRI
+# pyFIRI
+
 pyFIRI is a Python3 implementation of the FIRI-2018 (Faraday‐International
 Reference Ionosphere), a semi-empirical D-Region model of the non-auroral 
 Earth's ionosphere. Previous version of the FIRI (FT-2001) is incorporated
