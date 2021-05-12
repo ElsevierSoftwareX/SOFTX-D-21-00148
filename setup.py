@@ -3,12 +3,42 @@
 
 from setuptools import setup, find_packages
 
+PROJECT_DESCRIPTION = "pyFIRI is a Python3 implementation of the FIRI-2018, \
+a semi-empirical model of the non-auroral Earth's ionosphere D-Region."
+
+PROJECT_DESCRIPTION_LONG = """
+pyFIRI is a Python3 implementation of the FIRI-2018 (Faraday‐International
+Reference Ionosphere), a semi-empirical D-Region model of the non-auroral 
+Earth's ionosphere. Previous version of the FIRI (FT-2001) is incorporated
+into a well-known mature International Reference Ionosphere (IRI, https://iri.gsfc.nasa.gov/ ) 
+model.
+
+If you use FIRI-2018 or pyFIRI directly or indirectly, please, cite in your research
+the following paper:
+
+Friedrich, M., Pock, C., & Torkar, K. (2018). FIRI‐2018, an updated empirical model 
+of the lower ionosphere. Journal of Geophysical Research: Space Physics, 123, 6737– 6751. 
+https://doi.org/10.1029/2018JA025437
+
+pyFIRI provides a thin Python3 wrapper around the tabulated electron density Ne profiles supplied 
+together with the research paper by Friedrich et al.(2018, https://doi.org/10.1029/2018JA025437 ). 
+For internal data representation, selection, and interpolation pyFIRI relies on xarray.DataArray 
+( https://xarray.pydata.org/ ) facilities.
+
+"""
+
 setup(
     # this will be the package name you will see, e.g. the output of 'conda list' in anaconda prompt
     name='pyfiri',
 
     # Versions should comply with PEP 440, https://www.python.org/dev/peps/pep-0440/
-    version='0.0.1b1',
+    version='0.0.1b6',
+    description=PROJECT_DESCRIPTION,
+    long_description=PROJECT_DESCRIPTION_LONG,
+    # long_description_content_type='text/markdown', - some bug with markdown - displayed not correctly
+    url='https://gitlab.com/zolotov/pyfiri',  # homepage
+    license='Apache Software License',  # to remove 'license: UNKNOWN' notice
+    platform=['any'],
     author='Oleg Zolotov',
     author_email='zolotovo@gmail.com',
 
