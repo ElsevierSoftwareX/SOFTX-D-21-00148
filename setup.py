@@ -32,7 +32,7 @@ setup(
     name='pyfiri',
 
     # Versions should comply with PEP 440, https://www.python.org/dev/peps/pep-0440/
-    version='0.0.1b6',
+    version='0.0.1b7',
     description=PROJECT_DESCRIPTION,
     long_description=PROJECT_DESCRIPTION_LONG,
     # long_description_content_type='text/markdown', - some bug with markdown - displayed not correctly
@@ -73,7 +73,7 @@ setup(
     #
     # For an analysis of "install_requires" vs pip's requirements files see:
     # https://packaging.python.org/en/latest/requirements.html
-    install_requires=['xarray', 'scipy'],  # Optional
+    install_requires=['scipy', 'xarray'],  # Optional
 
     # Automatically finds out all directories (packages) - those must contain a file named __init__.py (can be empty)
     packages=find_packages(),  # include/exclude arguments take * as wildcard, . for any sub-package names
