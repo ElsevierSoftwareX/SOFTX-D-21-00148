@@ -2,3 +2,30 @@
 Introduction
 ============
 
+The pyFIRI package is a Python3 implementation of the FIRI-2018 model. 
+Technically, the pyFIRI package is an xarray-based wrapper around pre-calculated values. 
+It calculates electron density values for the D-Region Earth’s non-auroral ionosphere.
+
+Input parameters are:
+- Julian Day Number (day of year, in range [1..365]),
+- solar zenith angle (degrees, [0..130]),
+- spherical geographical latitude (degrees, [0..60]),
+- solar radioflux index F10.7 (s.f.u., [75 .. 200]).
+
+pyFIRI output is electron density values in units of (electrons / m**3).
+No extrapolation is performed during calculations. So, input parameters values 
+that are outside the above named ranges are not expected.
+
+============
+Installation
+============
+
+The pyFIRI package is an ordinary Python3 wheel which is deposited into PYPI index
+( https://pypi.org/project/pyfiri/ ).
+
+The pyFIRI package should work with Python 3.6-3.8. If installing for Python 3.9, 
+a few issues can happen due to SciPy and NumPy dependencies. In those cases you may need 
+to install NumPy and SciPy packages.
+
+
+
