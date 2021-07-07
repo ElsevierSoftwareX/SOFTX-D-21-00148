@@ -36,16 +36,39 @@ To get the version of Python interpreter, the following command should be used:
 
 >>> python --version
 
-The output should be like
+The output may be like
 
 Python 3.8.2
 
 The exact Python version may differ on your machine.
 
 ======================================
-Installing the pyFIRI pachage with PIP
+Installing the pyFIRI package with PIP
 ======================================
 
+Below we expect that your working environment is configured. At least, ‘python’ corresponds 
+to Python3 interpreter with the python3-pip package installed.
+
+To install the pyFIRI package, the following command should be used:
+
+>>> python -m pip install pyfiri
+
+Here 'pyfiri' is the package name to install. The output may look like
+the following.
+
+Collecting pyfiri
+  Downloading https://files.pythonhosted.org/packages/6d/6e/469293e3a3783a509082078236aa9adf8b8af349a2d4aff60e582fe1e841/pyfiri-0.0.1b7-py3-none-any.whl (1.7MB)
+     |████████████████████████████████| 1.7MB 4.0MB/s 
+Requirement already satisfied: scipy in /usr/local/lib/python3.7/dist-packages (from pyfiri) (1.4.1)
+Requirement already satisfied: xarray in /usr/local/lib/python3.7/dist-packages (from pyfiri) (0.18.2)
+Requirement already satisfied: numpy>=1.13.3 in /usr/local/lib/python3.7/dist-packages (from scipy->pyfiri) (1.19.5)
+Requirement already satisfied: pandas>=1.0 in /usr/local/lib/python3.7/dist-packages (from xarray->pyfiri) (1.1.5)
+Requirement already satisfied: setuptools>=40.4 in /usr/local/lib/python3.7/dist-packages (from xarray->pyfiri) (57.0.0)
+Requirement already satisfied: pytz>=2017.2 in /usr/local/lib/python3.7/dist-packages (from pandas>=1.0->xarray->pyfiri) (2018.9)
+Requirement already satisfied: python-dateutil>=2.7.3 in /usr/local/lib/python3.7/dist-packages (from pandas>=1.0->xarray->pyfiri) (2.8.1)
+Requirement already satisfied: six>=1.5 in /usr/local/lib/python3.7/dist-packages (from python-dateutil>=2.7.3->pandas>=1.0->xarray->pyfiri) (1.15.0)
+Installing collected packages: pyfiri
+Successfully installed pyfiri-0.0.1b7
 
 
-
+The exact output will depend on your Python3 environment and pre-installed packages.
