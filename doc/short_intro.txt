@@ -21,7 +21,7 @@ Installation
 ============
 
 The pyFIRI package is an ordinary Python3 wheel which is deposited into PYPI index
-( https://pypi.org/project/pyfiri/ ). Due to this, Due to this, the standard way to install 
+( https://pypi.org/project/pyfiri/ ). Due to this, the standard way to install 
 is via the PIP.
 
 The pyFIRI package should work with Python 3.6-3.8. If installing for Python 3.9, 
