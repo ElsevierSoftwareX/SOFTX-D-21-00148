@@ -72,3 +72,156 @@ Successfully installed pyfiri-0.0.1b7
 
 
 The exact output will depend on your Python3 environment and pre-installed packages.
+
+=========================
+The pyFIRI usage examples
+=========================
+
+To use the pyFIRI package one should:
+- import the package,
+- create an instance of the firi2018 class,
+- use that instance to perform calculations.
+
+Let say, we need to calculate electron density for the D-Region 
+of the Earth’s non-auroral ionosphere for February 11, 2021, 
+solar zenith angle 42 (deg.), latitude 30 (deg.), and F10.7 = 120 (s.f.u.).
+Here Feb. 11, 2021 is Julian Day Number 42.
+
+===================
+get_profile example
+===================
+
+Below we calculate D-Region electron density for the above given parameters.
+
+>>> # importing the firi2018 class into current namespace
+>>> from pyfiri.firi import firi2018
+
+>>> # creating an instanse of the firi2018 class
+>>> model = firi2018()
+
+>>> # vertical electron density profile calculation
+>>> profile = model.get_profile(doy=42, chi=30., lat=30., f10_7=120.)
+
+Here the result is stored in ‘profile’ variable which is an xarray object.
+For xarray details see http://xarray.pydata.org/en/stable/ .
+To list coordinates of the result, the following command may be used.
+
+>>> # printing coordinates of the result
+>>> print(profile.coords)
+Coordinates:
+  * alt      (alt) float64 55.0 56.0 57.0 58.0 59.0 ... 147.0 148.0 149.0 150.0
+  * doy      (doy) float64 42.0
+  * chi      (chi) float64 30.0
+  * lat      (lat) float64 30.0
+  * f10_7    (f10_7) float64 120.0
+
+Here ‘alt’ is the list of altitudes (heights) for which the electron density values have been calculated. Other coordinates correspond to the input parameters.
+
+To see electron density values, the following command may be used.  
+
+>>> # printing electron density values
+>>> print(profile.values)
+[[[[[2.23562753e+06 3.15961287e+06 4.42948618e+06 6.14111258e+06
+     8.35663168e+06 1.11778169e+07 1.51464827e+07 2.14841402e+07
+     3.27292613e+07 5.18169078e+07 8.08854922e+07 1.20207948e+08
+     1.66702949e+08 2.16037955e+08 2.71489315e+08 3.34959380e+08
+     4.24938636e+08 5.22900445e+08 6.32892738e+08 7.32151790e+08
+     8.37795382e+08 9.28467260e+08 1.02335927e+09 1.08943002e+09
+     1.13741360e+09 1.14037840e+09 1.18398901e+09 1.31414029e+09
+     1.51681944e+09 1.83913778e+09 2.36729872e+09 3.21842038e+09
+     4.58225777e+09 6.46699417e+09 9.07033775e+09 1.26715114e+10
+     1.71867320e+10 2.23830839e+10 2.84419893e+10 3.59264137e+10
+     4.53409814e+10 5.65503540e+10 6.87285831e+10 8.06504233e+10
+     9.13540818e+10 1.00168437e+11 1.06733773e+11 1.10679935e+11
+     1.13404039e+11 1.15112554e+11 1.16748555e+11 1.18735003e+11
+     1.22521524e+11 1.25925343e+11 1.30480323e+11 1.32826661e+11
+     1.34467839e+11 1.34492211e+11 1.34066510e+11 1.32750588e+11
+     1.31908289e+11 1.31145118e+11 1.30202604e+11 1.29709282e+11
+     1.29011503e+11 1.28152840e+11 1.27608066e+11 1.27573265e+11
+     1.27946956e+11 1.29225929e+11 1.31123393e+11 1.33613429e+11
+     1.36649626e+11 1.40110935e+11 1.43786990e+11 1.47632303e+11
+     1.51324474e+11 1.54832789e+11 1.58281162e+11 1.61696078e+11
+     1.65361431e+11 1.69210174e+11 1.73359297e+11 1.77044562e+11
+     1.81076547e+11 1.85022500e+11 1.89008446e+11 1.93202096e+11
+     1.97385942e+11 2.01508148e+11 2.05562651e+11 2.08862961e+11
+     2.12474648e+11 2.16682600e+11 2.15718495e+11 2.15756801e+11]]]]]
+
+
+The 'get_profile' method perform a few range-checks. For example,
+someone misprinted 420 instead of 42. Then the method will rize
+the ValueError exception.
+
+>>> # Example with misprint in DOY
+>>> profile = model.get_profile(doy=420, chi=30., lat=30., f10_7=120.)
+---------------------------------------------------------------------------
+
+ValueError                                Traceback (most recent call last)
+
+<ipython-input-9-ea1b0b68d809> in <module>()
+      6 
+      7 # calculate vertical electron density profile
+----> 8 profile = model.get_profile(doy= 420, chi=30, lat=30, f10_7=120)
+
+/usr/local/lib/python3.7/dist-packages/pyfiri/firi.py in get_profile(self, doy, chi, lat, f10_7)
+     68                 raise ValueError("Accepted Julian Day Number should be in [1-365]; "
+     69                                  "The value {value} is given."
+---> 70                                  .format(value=_))
+     71 
+     72         # ? Solar Zenith Angle is in 0 - 130 range
+
+ValueError: Accepted Julian Day Number should be in [1-365]; The value 420.0 is given.
+
+
+==============
+interp example
+==============
+The above 'get_profile' method could be replaced with the following command.
+
+>>> # calculate vertical electron density profile
+>>> profile = model.interp(doy= 42, chi=30, lat=30, f10_7=120)
+>>> print(profile.values)
+[2.23562753e+06 3.15961287e+06 4.42948618e+06 6.14111258e+06
+ 8.35663168e+06 1.11778169e+07 1.51464827e+07 2.14841402e+07
+ 3.27292613e+07 5.18169078e+07 8.08854922e+07 1.20207948e+08
+ 1.66702949e+08 2.16037955e+08 2.71489315e+08 3.34959380e+08
+ 4.24938636e+08 5.22900445e+08 6.32892738e+08 7.32151790e+08
+ 8.37795382e+08 9.28467260e+08 1.02335927e+09 1.08943002e+09
+ 1.13741360e+09 1.14037840e+09 1.18398901e+09 1.31414029e+09
+ 1.51681944e+09 1.83913778e+09 2.36729872e+09 3.21842038e+09
+ 4.58225777e+09 6.46699417e+09 9.07033775e+09 1.26715114e+10
+ 1.71867320e+10 2.23830839e+10 2.84419893e+10 3.59264137e+10
+ 4.53409814e+10 5.65503540e+10 6.87285831e+10 8.06504233e+10
+ 9.13540818e+10 1.00168437e+11 1.06733773e+11 1.10679935e+11
+ 1.13404039e+11 1.15112554e+11 1.16748555e+11 1.18735003e+11
+ 1.22521524e+11 1.25925343e+11 1.30480323e+11 1.32826661e+11
+ 1.34467839e+11 1.34492211e+11 1.34066510e+11 1.32750588e+11
+ 1.31908289e+11 1.31145118e+11 1.30202604e+11 1.29709282e+11
+ 1.29011503e+11 1.28152840e+11 1.27608066e+11 1.27573265e+11
+ 1.27946956e+11 1.29225929e+11 1.31123393e+11 1.33613429e+11
+ 1.36649626e+11 1.40110935e+11 1.43786990e+11 1.47632303e+11
+ 1.51324474e+11 1.54832789e+11 1.58281162e+11 1.61696078e+11
+ 1.65361431e+11 1.69210174e+11 1.73359297e+11 1.77044562e+11
+ 1.81076547e+11 1.85022500e+11 1.89008446e+11 1.93202096e+11
+ 1.97385942e+11 2.01508148e+11 2.05562651e+11 2.08862961e+11
+ 2.12474648e+11 2.16682600e+11 2.15718495e+11 2.15756801e+11]
+
+As one can see, electron density values are the same but dimensions are reduced. 
+This happens because firi2018.intrp method behaves exactly as xarray.interp method 
+for the compatability reasons. Technically, firi2018.intrp method proxies 
+the data to the xarray.interp method.
+
+In contrast with 'get_profile' method, the 'interp' method does not perform range-checks.
+
+>>> # calculate vertical electron density profile
+>>> profile = model.interp(doy=420, chi=30, lat=30, f10_7=120)
+>>> print(profile.values)
+[nan nan nan nan nan nan nan nan nan nan nan nan nan nan nan nan nan nan
+ nan nan nan nan nan nan nan nan nan nan nan nan nan nan nan nan nan nan
+ nan nan nan nan nan nan nan nan nan nan nan nan nan nan nan nan nan nan
+ nan nan nan nan nan nan nan nan nan nan nan nan nan nan nan nan nan nan
+ nan nan nan nan nan nan nan nan nan nan nan nan nan nan nan nan nan nan
+ nan nan nan nan nan nan]
+
+ Here we obtain nan's because it is the default behavior of the xarray.interp
+ method. For details on xarray.interp method 
+ see http://xarray.pydata.org/en/stable/generated/xarray.DataArray.interp.html
