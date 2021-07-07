@@ -2,9 +2,10 @@
 Introduction
 ============
 
-The pyFIRI package is a Python3 implementation of the FIRI-2018 model. 
+The pyFIRI package is a Python3 implementation of the FIRI-2018 model 
+( https://doi.org/10.1029/2018JA025437 ). 
 Technically, the pyFIRI package is an xarray-based wrapper around pre-calculated values. 
-It calculates electron density values for the D-Region Earth’s non-auroral ionosphere.
+It calculates electron density values for the D-Region of the Earth’s non-auroral ionosphere.
 
 Input parameters are:
 - Julian Day Number (day of year, in range [1..365]),
@@ -32,7 +33,7 @@ to pre-install NumPy and SciPy packages.
 Obtaining the Python interpreter version
 ========================================
 
-To get the version of Python interpreter, the following command should be used:
+To get the version of Python interpreter, the following command may be used:
 
 >>> python --version
 
@@ -84,7 +85,7 @@ To use the pyFIRI package one should:
 
 Let say, we need to calculate electron density for the D-Region 
 of the Earth’s non-auroral ionosphere for February 11, 2021, 
-solar zenith angle 42 (deg.), latitude 30 (deg.), and F10.7 = 120 (s.f.u.).
+solar zenith angle 30 (deg.), latitude 30 (deg.), and F10.7 = 120 (s.f.u.).
 Here Feb. 11, 2021 is Julian Day Number 42.
 
 ===================
@@ -102,7 +103,7 @@ Below we calculate D-Region electron density for the above given parameters.
 >>> # vertical electron density profile calculation
 >>> profile = model.get_profile(doy=42, chi=30., lat=30., f10_7=120.)
 
-Here the result is stored in ‘profile’ variable which is an xarray object.
+Here the result is stored in the ‘profile’ variable which is an xarray object.
 For xarray details see http://xarray.pydata.org/en/stable/ .
 To list coordinates of the result, the following command may be used.
 
@@ -115,7 +116,8 @@ Coordinates:
   * lat      (lat) float64 30.0
   * f10_7    (f10_7) float64 120.0
 
-Here ‘alt’ is the list of altitudes (heights) for which the electron density values have been calculated. Other coordinates correspond to the input parameters.
+Here ‘alt’ is the list of altitudes (heights) for which the electron density values have been calculated. 
+Other coordinates correspond to the input parameters.
 
 To see electron density values, the following command may be used.  
 
@@ -148,7 +150,7 @@ To see electron density values, the following command may be used.
 
 
 The 'get_profile' method perform a few range-checks. For example,
-someone misprinted 420 instead of 42. Then the method will rize
+if someone misprints 420 instead of 42, then the method will rize
 the ValueError exception.
 
 >>> # Example with misprint in DOY
@@ -179,6 +181,9 @@ The above 'get_profile' method could be replaced with the following command.
 
 >>> # calculate vertical electron density profile
 >>> profile = model.interp(doy= 42, chi=30, lat=30, f10_7=120)
+
+Let us see the result.
+
 >>> print(profile.values)
 [2.23562753e+06 3.15961287e+06 4.42948618e+06 6.14111258e+06
  8.35663168e+06 1.11778169e+07 1.51464827e+07 2.14841402e+07
@@ -211,6 +216,7 @@ for the compatability reasons. Technically, firi2018.intrp method proxies
 the data to the xarray.interp method.
 
 In contrast with 'get_profile' method, the 'interp' method does not perform range-checks.
+So, calculations for DOY=420 will not result in an Exception.
 
 >>> # calculate vertical electron density profile
 >>> profile = model.interp(doy=420, chi=30, lat=30, f10_7=120)
