@@ -21,11 +21,31 @@ Installation
 ============
 
 The pyFIRI package is an ordinary Python3 wheel which is deposited into PYPI index
-( https://pypi.org/project/pyfiri/ ).
+( https://pypi.org/project/pyfiri/ ). Due to this, Due to this, the standard way to install 
+is via the PIP.
 
 The pyFIRI package should work with Python 3.6-3.8. If installing for Python 3.9, 
-a few issues can happen due to SciPy and NumPy dependencies. In those cases you may need 
-to install NumPy and SciPy packages.
+a few issues may happen due to SciPy and NumPy dependencies. In those cases you may need 
+to pre-install NumPy and SciPy packages.
+
+========================================
+Obtaining the Python interpreter version
+========================================
+
+To get the version of Python interpreter, the following command should be used:
+
+>>> python --version
+
+The output should be like
+
+Python 3.8.2
+
+The exact Python version may differ on your machine.
+
+======================================
+Installing the pyFIRI pachage with PIP
+======================================
+
 
 
 
