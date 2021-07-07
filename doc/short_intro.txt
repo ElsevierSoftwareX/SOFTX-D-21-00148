@@ -218,7 +218,7 @@ the data to the xarray.interp method.
 In contrast with 'get_profile' method, the 'interp' method does not perform range-checks.
 So, calculations for DOY=420 will not result in an Exception.
 
->>> # calculate vertical electron density profile
+>>> # calculate for INCORRECT DOY=420
 >>> profile = model.interp(doy=420, chi=30, lat=30, f10_7=120)
 >>> print(profile.values)
 [nan nan nan nan nan nan nan nan nan nan nan nan nan nan nan nan nan nan
