@@ -79,9 +79,9 @@ class firi2018:
 
         # ? latitude is in 0 - 360 range
         for _ in lat:
-            if (_ > 360) or (_ < 0):
+            if (_ > 60) or (_ < 0):
                 raise ValueError("Latitude should be in [0-360] range."
-                                 "A user should fit input values into [0-360] range if required."
+                                 "A user should fit input values into [0-60] range if required."
                                  "The value {value} is given."
                                  .format(value=_))
 
