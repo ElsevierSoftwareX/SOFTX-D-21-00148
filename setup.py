@@ -32,7 +32,7 @@ setup(
     name='pyfiri',
 
     # Versions should comply with PEP 440, https://www.python.org/dev/peps/pep-0440/
-    version='0.0.1b7',
+    version='0.0.1b8',
     description=PROJECT_DESCRIPTION,
     long_description=PROJECT_DESCRIPTION_LONG,
     # long_description_content_type='text/markdown', - some bug with markdown - displayed not correctly
